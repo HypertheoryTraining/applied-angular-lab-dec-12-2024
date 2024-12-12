@@ -12,7 +12,7 @@ import {
   template: `
     <div>
       <button
-        [disabled]="disableDecrement()"
+        [disabled]="decrementDisabled()"
         (click)="decrement()"
         class="btn btn-primary"
       >
@@ -20,6 +20,9 @@ import {
       </button>
       <span data-testid="current">{{ current() }}</span>
       <button (click)="increment()" class="btn btn-primary">+</button>
+    </div>
+    <div>
+      <p data-testid="fizzBuzz">{{ fizzBuzz() }}</p>
     </div>
   `,
   styles: ``,
@@ -34,5 +37,13 @@ export class UiComponent {
     this.current.update(() => this.current() - 1);
   }
 
-  disableDecrement = computed(() => this.current() === 0);
+  decrementDisabled = computed(() => this.current() === 0);
+
+  fizzBuzz = computed(() => {
+    if (this.current() === 0) return '';
+    if (this.current() % 3 === 0 && this.current() % 5 === 0) return 'FizzBuzz';
+    if (this.current() % 3 === 0) return 'Fizz';
+    if (this.current() % 5 === 0) return 'Buzz';
+    return '';
+  });
 }
