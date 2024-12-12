@@ -3,4 +3,5 @@ export type BookEntity = {
   title: string;
   author: string;
   year: number;
+  pages: number;
 };
