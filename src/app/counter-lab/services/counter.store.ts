@@ -2,7 +2,9 @@ import { computed } from '@angular/core';
 import {
   patchState,
   signalStore,
+  watchState,
   withComputed,
+  withHooks,
   withMethods,
   withState,
 } from '@ngrx/signals';
@@ -48,5 +50,17 @@ export const CounterStore = signalStore(
         return '';
       }),
     };
+  }),
+  withHooks({
+    onInit(store) {
+      const saved = localStorage.getItem('counter');
+      if (saved !== null) {
+        const state = JSON.parse(saved) as unknown as CounterState;
+        patchState(store, state);
+      }
+      watchState(store, (state) => {
+        localStorage.setItem('counter', JSON.stringify(state));
+      });
+    },
   }),
 );
