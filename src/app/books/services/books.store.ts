@@ -15,11 +15,17 @@ import { BooksDataService } from './books-data.service';
 import * as helpers from './helpers';
 import { withSorting } from './features/sort.feature';
 import { withDevtools } from '@angular-architects/ngrx-toolkit';
+import {
+  clearSelected,
+  setSelected,
+  withSelected,
+} from './features/selected.feature';
 
 export const BookStore = signalStore(
   withDevtools('books'),
   withEntities<BookEntity>(),
   withSorting(),
+  withSelected(),
   withComputed((store) => {
     return {
       books: computed(() =>
@@ -35,12 +41,22 @@ export const BookStore = signalStore(
         }),
       ),
       stats: computed(() => helpers.deriveStatsFromBooks(store.entities())),
+      selectedBook: computed(() => {
+        const id = store.selectedId();
+        if (id !== null) {
+          return store.entityMap()[id];
+        } else {
+          return null;
+        }
+      }),
     };
   }),
   withMethods((store) => {
     const service = inject(BooksDataService);
 
     return {
+      setSelected: (id: string) => patchState(store, setSelected(id)),
+      clearSelected: () => patchState(store, clearSelected()),
       _load: rxMethod<void>(
         pipe(
           switchMap(() =>

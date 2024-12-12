@@ -5,6 +5,7 @@ import { StatsComponent } from './pages/stats-component';
 import { BooksDataService } from './services/books-data.service';
 import { BookStore } from './services/books.store';
 import { PrefsComponent } from './pages/prefs-component';
+import { DetailsComponent } from './pages/details-page';
 
 export const BOOK_ROUTES: Routes = [
   {
@@ -15,6 +16,7 @@ export const BOOK_ROUTES: Routes = [
       { path: 'list', component: ListComponent },
       { path: 'stats', component: StatsComponent },
       { path: 'prefs', component: PrefsComponent },
+      { path: 'details/:id', component: DetailsComponent },
       { path: '**', redirectTo: 'list' },
     ],
   },
