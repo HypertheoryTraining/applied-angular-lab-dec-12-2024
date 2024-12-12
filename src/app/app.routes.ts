@@ -29,7 +29,12 @@ export const routes: Routes = [
     path: 'home',
     component: HomeComponent,
   },
-
+  {
+    path: 'counter',
+    canMatch: [canMatchFeature('counter-lab')],
+    loadChildren: () =>
+      import('./counter-lab/counter.routes').then((r) => r.COUNTER_ROUTES),
+  },
   {
     path: 'counter',
     loadChildren: () =>
