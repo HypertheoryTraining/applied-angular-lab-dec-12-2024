@@ -15,8 +15,14 @@ import { FeatureDirective } from '@shared';
         <ul class="menu menu-horizontal px-1">
           <li>
             <a routerLink="">Home</a>
+          </li>
+          <li>
             <a routerLink="counter">Counter</a>
+          </li>
+          <li>
             <a *feature="'meals'" routerLink="meals">Meals</a>
+          </li>
+          <li>
             <a *feature="'books'" routerLink="books">Books</a>
           </li>
         </ul>

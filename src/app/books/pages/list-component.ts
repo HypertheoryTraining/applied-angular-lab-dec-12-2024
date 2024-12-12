@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   imports: [SorterComponent, RouterLink],
   template: ` @if (store.books()) {
     <app-book-sorter />
-    <div class="grid grid-cols-4 gap-8">
+    <div class="grid grid-cols-4 gap-8 h-svh overflow-auto">
       @for (book of store.books(); track book.id) {
         <div class="card bg-base-100  shadow-xl">
           <div class="card-body">
