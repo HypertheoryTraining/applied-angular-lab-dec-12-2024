@@ -27,6 +27,7 @@ export const CounterStore = signalStore(
       decrement: () =>
         patchState(store, { current: store.current() - store.by() }),
       changeCountBy: (by: ByValues) => patchState(store, { by }),
+      reset: () => patchState(store, { current: 0 }),
     };
   }),
   withComputed((store) => {

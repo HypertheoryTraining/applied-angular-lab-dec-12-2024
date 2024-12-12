@@ -5,10 +5,12 @@ import { CounterStore } from '../services/counter.store';
   selector: 'app-prefs',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
-  template: ` <div>
-    <button class="btn btn-circle" (click)="store.changeCountBy(1)">1</button>
-    <button class="btn btn-circle" (click)="store.changeCountBy(3)">3</button>
-    <button class="btn btn-circle" (click)="store.changeCountBy(5)">5</button>
+  template: ` <div class="flex gap-3">
+    @for (val of store.byValues(); track val) {
+      <button class="btn btn-circle" (click)="store.changeCountBy(val)">
+        {{ val }}
+      </button>
+    }
   </div>`,
   styles: ``,
 })

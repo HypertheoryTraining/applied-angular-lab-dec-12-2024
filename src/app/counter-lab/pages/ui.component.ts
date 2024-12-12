@@ -6,7 +6,7 @@ import { CounterStore } from '../services/counter.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: `
-    <div>
+    <div class="flex gap-5 flex-row align-bottom">
       <button
         class="btn btn-primary"
         (click)="store.decrement()"
@@ -14,12 +14,19 @@ import { CounterStore } from '../services/counter.store';
       >
         -
       </button>
-      <span data-testid="current">{{ store.current() }}</span>
+      <span class="btn btn-circle no-click" data-testid="current">{{
+        store.current()
+      }}</span>
       <button class="btn btn-primary" (click)="store.increment()">+</button>
+      <button class="btn btn-warning" (click)="store.reset()">Reset</button>
       <span>{{ store.fizzBuzz() }}</span>
     </div>
   `,
-  styles: ``,
+  styles: `
+    .no-click {
+      pointer-events: none;
+    }
+  `,
 })
 export class UiComponent {
   store = inject(CounterStore);
