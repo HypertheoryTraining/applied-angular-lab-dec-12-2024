@@ -1,6 +1,41 @@
 # Lab
 
-## Getting Setup
+## Getting Setup (I will guide you through this)
+
+Go to https://github.com/HypertheoryTraining/applied-angular-lab-dec-12-2024
+
+Click the "fork" button.
+
+Hit the "Create Fork" button.
+
+This will create a fork (copy) of the lab in your Github account.
+
+After the fork is created, click the [<> Code] button, make sure the "Github CLI" tab is selected, and copy the command that is displayed.
+
+On your VM, open the [>_] Windows Terminal. You should be in the class folder.
+
+Past the command you copied above into your terminal and run it.
+
+Example:
+
+```sh
+gh repo clone YOUR_GITHUB_ACCOUNT/applied-angular-lab-dec-12-2024-trial
+```
+
+Type the following in the terminal:
+
+```sh
+cd applied-angular-lab-dec-12-2024-trial
+npm ci && code
+```
+
+Get ready to rock.
+
+Do the lab(s). Commit your code and push it as often as you like.
+
+When you are _done_, push your final changes to the Github, open your repo in the browser on github, and send a pull request.
+
+Hit the "contribute" button, make a pull request, giving me a brief note about what you did.
 
 ## Options
 
