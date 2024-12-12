@@ -1,11 +1,6 @@
 import { ChangeDetectionStrategy, Component, resource } from '@angular/core';
+import { BookEntity } from '../types';
 
-type BookEntity = {
-  id: string;
-  title: string;
-  author: string;
-  year: number;
-};
 @Component({
   selector: 'app-book-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
