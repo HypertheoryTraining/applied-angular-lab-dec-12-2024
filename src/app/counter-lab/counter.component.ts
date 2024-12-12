@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,7 +7,10 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   imports: [RouterOutlet, RouterLink],
   template: `
     <div>
-      <a routerLink="ui">UI</a>
+      <button class="btn btn-secondary"><a routerLink="ui">UI</a></button>
+      <button class="btn btn-secondary">
+        <a routerLink="prefs">Preferences</a>
+      </button>
       <router-outlet />
     </div>
   `,
