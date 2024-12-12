@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 
 @Component({
   selector: 'app-ui',
@@ -8,11 +8,15 @@ import { Component, signal } from '@angular/core';
 export class UiComponent {
   count = signal(0);
 
+  canDecrement = computed(() => this.count() > 0);
+
   increment() {
     this.count.update((value) => value + 1);
   }
 
   decrement() {
-    this.count.update((value) => value - 1);
+    if (this.canDecrement()) {
+      this.count.update((value) => value - 1);
+    }
   }
 }
