@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
 import { WelcomeComponent } from './components/welcome.component';
-
 import { DemoComponent } from './components/demo.component';
 import { HomeComponent } from './components/home.component';
 import { canMatchFeature } from './shared/feature-managment';
-import { BooksComponent } from './features/books/books.component';
 
 export const routes: Routes = [
   {
@@ -37,9 +35,9 @@ export const routes: Routes = [
   },
   {
     path: 'books',
-    component: BooksComponent,
+    loadChildren: () =>
+      import('./features/books/books.routes').then((r) => r.BOOKS_ROUTES),
   },
-
   {
     path: '**',
     redirectTo: 'home',
