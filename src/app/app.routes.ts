@@ -4,6 +4,7 @@ import { WelcomeComponent } from './components/welcome.component';
 import { DemoComponent } from './components/demo.component';
 import { HomeComponent } from './components/home.component';
 import { canMatchFeature } from './shared/feature-managment';
+import { BooksComponent } from './features/books/books.component';
 
 export const routes: Routes = [
   {
@@ -29,12 +30,16 @@ export const routes: Routes = [
     path: 'home',
     component: HomeComponent,
   },
-
   {
     path: 'counter',
     loadChildren: () =>
       import('./counter/counter.routes').then((r) => r.COUNTER_ROUTES),
   },
+  {
+    path: 'books',
+    component: BooksComponent,
+  },
+
   {
     path: '**',
     redirectTo: 'home',
