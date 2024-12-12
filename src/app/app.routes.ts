@@ -41,6 +41,10 @@ export const routes: Routes = [
       import('./counter/counter.routes').then((r) => r.COUNTER_ROUTES),
   },
   {
+    path: 'news',
+    loadChildren: () => import('./news/news.routes').then((r) => r.NEWS_ROUTES),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

@@ -17,6 +17,7 @@ import { FeatureDirective } from '@shared';
             <a routerLink="">Home</a>
             <a routerLink="counter">Counter</a>
             <a *feature="'meals'" routerLink="meals">Meals</a>
+            <a routerLink="news">News</a>
           </li>
         </ul>
       </div>
