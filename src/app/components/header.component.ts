@@ -17,6 +17,7 @@ import { FeatureDirective } from '@shared';
             <a routerLink="">Home</a>
             <a routerLink="counter">Counter</a>
             <a *feature="'meals'" routerLink="meals">Meals</a>
+            <a routerLink="counter-lab">Counter Lab</a>
           </li>
         </ul>
       </div>
@@ -37,6 +38,10 @@ export class HeaderComponent {
     {
       text: 'Counter',
       href: 'counter',
+    },
+    {
+      text: 'Counter-lab',
+      href: 'counter-lab',
     },
   ]);
 }
