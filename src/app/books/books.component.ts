@@ -6,7 +6,7 @@ import { RouterLinkActive, RouterOutlet, RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
-    <div class="grid  gap-4">
+    <div class="flex gap-4 p-8">
       <a
         class="link"
         routerLink="list"
