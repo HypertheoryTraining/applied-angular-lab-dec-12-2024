@@ -29,6 +29,17 @@ import { RouterLinkActive, RouterOutlet, RouterLink } from '@angular/router';
         ]"
         >Stats</a
       >
+      <a
+        class="link"
+        routerLink="prefs"
+        [routerLinkActive]="[
+          'text-bold',
+          'underline',
+          'font-bold',
+          'uppercase',
+        ]"
+        >Prefs</a
+      >
     </div>
     <router-outlet />
   `,

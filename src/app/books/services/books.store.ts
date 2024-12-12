@@ -13,12 +13,27 @@ import { pipe, switchMap } from 'rxjs';
 import { BookEntity } from '../types';
 import { BooksDataService } from './books-data.service';
 import * as helpers from './helpers';
+import { withSorting } from './features/sort.feature';
+import { withDevtools } from '@angular-architects/ngrx-toolkit';
 
 export const BookStore = signalStore(
+  withDevtools('books'),
   withEntities<BookEntity>(),
+  withSorting(),
   withComputed((store) => {
     return {
-      books: computed(() => store.entities()),
+      books: computed(() =>
+        store.entities().sort((a, b) => {
+          const key = store.by();
+          switch (key) {
+            case 'year':
+              return a.year > b.year ? 1 : a.year < b.year ? -1 : 0;
+            case 'author':
+            case 'title':
+              return a[key].localeCompare(b[key]);
+          }
+        }),
+      ),
       stats: computed(() => helpers.deriveStatsFromBooks(store.entities())),
     };
   }),

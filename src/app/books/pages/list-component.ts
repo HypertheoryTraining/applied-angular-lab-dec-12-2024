@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { BookStore } from '../services/books.store';
+import { SorterComponent } from '../components/sorter.component';
 
 @Component({
   selector: 'app-book-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [SorterComponent],
   template: ` @if (store.books()) {
+    <app-book-sorter />
     <div class="grid grid-cols-4 gap-8">
       @for (book of store.books(); track book.id) {
         <div class="card bg-base-100  shadow-xl">
