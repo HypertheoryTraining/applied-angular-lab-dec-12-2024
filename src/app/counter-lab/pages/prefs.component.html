@@ -1,0 +1,13 @@
+<div>
+  <h2>Select Increment/Decrement Value</h2>
+  <ul>
+    <li *ngFor="let option of incrementOptions">
+      <button
+        (click)="selectOption(option)"
+        [class.selected]="option === selectedOption"
+      >
+        {{ option }}
+      </button>
+    </li>
+  </ul>
+</div>

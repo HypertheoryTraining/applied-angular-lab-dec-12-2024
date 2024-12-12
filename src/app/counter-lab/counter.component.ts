@@ -1,18 +1,12 @@
-import { Component, signal } from '@angular/core';
+import { signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-counter',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './counter.component.html',
   styleUrls: ['./counter.component.css'],
 })
-export class CounterComponent {
-  count = signal(0);
-
-  increment() {
-    this.count.update((value) => value + 1);
-  }
-
-  decrement() {
-    this.count.update((value) => value - 1);
-  }
-}
+export class CounterComponent {}

@@ -4,6 +4,9 @@ import { WelcomeComponent } from './components/welcome.component';
 import { DemoComponent } from './components/demo.component';
 import { HomeComponent } from './components/home.component';
 import { canMatchFeature } from './shared/feature-managment';
+import { CounterComponent } from './counter-lab/counter.component';
+import { UiComponent } from './counter-lab/pages/ui.component';
+import { PrefsComponent } from './counter-lab/pages/prefs.component';
 
 export const routes: Routes = [
   {
@@ -37,8 +40,11 @@ export const routes: Routes = [
   },
   {
     path: 'counter-lab',
-    loadChildren: () =>
-      import('./counter-lab/counter.routes').then((m) => m.COUNTER_ROUTES),
+    component: CounterComponent,
+    children: [
+      { path: 'ui', component: UiComponent },
+      { path: 'prefs', component: PrefsComponent },
+    ],
   },
   {
     path: '**',
