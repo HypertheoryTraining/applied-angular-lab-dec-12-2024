@@ -20,6 +20,7 @@ import {
       </button>
       <span data-testid="current">{{ current() }}</span>
       <button class="btn btn-primary" (click)="increment()">-</button>
+      <span>{{ fizzBuzz() }}</span>
     </div>
   `,
   styles: ``,
@@ -36,4 +37,12 @@ export class UiComponent {
   }
 
   disableDecrement = computed(() => this.current() === 0);
+
+  fizzBuzz() {
+    if (this.current() === 0) return;
+    if (this.current() % 3 === 0 && this.current() % 5 === 0) return 'fizzBuzz';
+    if (this.current() % 3 === 0) return 'fizz';
+    if (this.current() % 5 === 0) return 'buzz';
+    return;
+  }
 }
