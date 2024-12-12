@@ -33,9 +33,7 @@ export const routes: Routes = [
     path: 'counter',
     canMatch: [canMatchFeature('counter-lab')],
     loadChildren: () =>
-      import('./counter-lab/counter-lab.routes').then(
-        (r) => r.COUNTER_LAB_ROUTES,
-      ),
+      import('./counter-lab/counter.routes').then((r) => r.COUNTER_ROUTES),
   },
   {
     path: 'counter',
