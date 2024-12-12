@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, resource } from '@angular/core';
-import { BookEntity } from '../books.component';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { BooksStore } from '../services/books.store';
+import { BooksDataService } from '../services/books-data.service';
 
 // type BookApiResponse = {
 //   data: BookEntity[];
@@ -9,6 +10,7 @@ import { BookEntity } from '../books.component';
   selector: 'app-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
+  providers: [BooksStore, BooksDataService],
   template: `
     <div className="overflow-x-auto">
       <table className="table">
@@ -21,13 +23,15 @@ import { BookEntity } from '../books.component';
           </tr>
         </thead>
         <tbody>
-          @for (book of books.value(); track book.id) {
-            <tr>
-              <td>{{ book.id }}</td>
-              <td>{{ book.title }}</td>
-              <td>{{ book.author }}</td>
-              <td>{{ book.year }}</td>
-            </tr>
+          @if (store.books()) {
+            @for (book of store.books(); track book.id) {
+              <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.year }}</td>
+              </tr>
+            }
           }
         </tbody>
       </table>
@@ -36,10 +40,5 @@ import { BookEntity } from '../books.component';
   styles: ``,
 })
 export class ListComponent {
-  books = resource<BookEntity[], unknown>({
-    loader: () =>
-      fetch('/api/books')
-        .then((res) => res.json())
-        .then((r) => r.data),
-  });
+  store = inject(BooksStore);
 }
