@@ -1,17 +1,18 @@
-import { computed, inject } from '@angular/core';
-import { tapResponse } from '@ngrx/operators';
 import {
   patchState,
   signalStore,
   withComputed,
   withHooks,
   withMethods,
+  withState,
 } from '@ngrx/signals';
 import { setEntities, withEntities } from '@ngrx/signals/entities';
+import { BookEntity } from '../types';
+import { computed, inject } from '@angular/core';
+import { BooksDataService } from './books-data.service';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap } from 'rxjs';
-import { BookEntity } from '../types';
-import { BooksDataService } from './books-data.service';
+import { tapResponse } from '@ngrx/operators';
 
 export const BookStore = signalStore(
   withEntities<BookEntity>(),
