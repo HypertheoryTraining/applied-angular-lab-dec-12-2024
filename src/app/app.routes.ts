@@ -36,6 +36,12 @@ export const routes: Routes = [
       import('./counter/counter.routes').then((r) => r.COUNTER_ROUTES),
   },
   {
+    path: 'books',
+    canMatch: [canMatchFeature('books')],
+    loadChildren: () =>
+      import('./books/books.routes').then((r) => r.BOOK_ROUTES),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
