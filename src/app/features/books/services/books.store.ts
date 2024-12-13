@@ -2,6 +2,7 @@ import { computed, inject } from '@angular/core';
 import {
   patchState,
   signalStore,
+  watchState,
   withComputed,
   withHooks,
   withMethods,
@@ -18,15 +19,13 @@ const BY_VALUES = ['title', 'author', 'year'] as const;
 type SortKey = keyof Pick<BookEntity, 'title' | 'author' | 'year'>;
 
 export type ByValues = (typeof BY_VALUES)[number];
-type ColumnState = {
-  current: string;
+type SortState = {
   by: SortKey;
 };
 
 export const BooksStore = signalStore(
   withEntities<BookEntity>(),
-  withState<ColumnState>({
-    current: '',
+  withState<SortState>({
     by: 'title',
   }),
   withComputed((store) => {
@@ -88,6 +87,15 @@ export const BooksStore = signalStore(
   withHooks({
     onInit(store) {
       store._loadServerData();
+
+      const saved = localStorage.getItem('sortBy');
+      if (saved !== null) {
+        const state = JSON.parse(saved) as unknown as SortState;
+        patchState(store, state);
+      }
+      watchState(store, (state) => {
+        localStorage.setItem('sortBy', JSON.stringify(state));
+      });
     },
   }),
 );

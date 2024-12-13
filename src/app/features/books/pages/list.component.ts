@@ -39,49 +39,4 @@ import { PrefsComponent } from './prefs.component';
 })
 export class ListComponent {
   store = inject(BooksStore);
-
-  //   currentSortColumn = '';
-  //   isSortAsc = true;
-
-  //   sortTable(column: string) {
-  //     if (this.currentSortColumn === column) {
-  //       this.isSortAsc = !this.isSortAsc;
-  //     } else {
-  //       this.currentSortColumn = column;
-  //       this.isSortAsc = false;
-  //     }
-
-  //     switch (column) {
-  //       case 'Title':
-  //         return this.store
-  //           .books()
-  //           .sort((a, b) =>
-  //             this.isSortAsc
-  //               ? a.title.localeCompare(b.title)
-  //               : b.title.localeCompare(a.title),
-  //           );
-  //       case 'ID':
-  //         return this.store
-  //           .books()
-  //           .sort((a, b) =>
-  //             this.isSortAsc
-  //               ? parseInt(a.id) - parseInt(b.id)
-  //               : parseInt(b.id) - parseInt(a.id),
-  //           );
-  //       case 'Author':
-  //         return this.store
-  //           .books()
-  //           .sort((a, b) =>
-  //             this.isSortAsc
-  //               ? a.author.localeCompare(b.author)
-  //               : b.author.localeCompare(a.author),
-  //           );
-  //       case 'Year':
-  //         return this.store
-  //           .books()
-  //           .sort((a, b) => (this.isSortAsc ? a.year - b.year : b.year - a.year));
-  //       default:
-  //         return undefined;
-  //     }
-  //   }
 }
