@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { CounterStore } from '../services/counter.store';
 
 @Component({
   selector: 'app-prefs',
@@ -8,12 +9,22 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     <div>
       <h3>Count By:</h3>
       <ul>
-        <li><button>1</button></li>
-        <li><button>2</button></li>
-        <li><button>3</button></li>
+        @for (val of store.increments(); track val) {
+          <li>
+            <button
+              class="btn"
+              (click)="store.changeIncrements(val)"
+              [disabled]="store.by() === val"
+            >
+              Count By {{ val }}
+            </button>
+          </li>
+        }
       </ul>
     </div>
   `,
   styles: ``,
 })
-export class PrefsComponent {}
+export class PrefsComponent {
+  store = inject(CounterStore);
+}

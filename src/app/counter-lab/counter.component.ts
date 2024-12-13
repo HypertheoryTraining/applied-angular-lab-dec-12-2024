@@ -5,9 +5,11 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   selector: 'app-counter',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, RouterOutlet],
-  template: `<div class="flexbox">
-    <a class="link link-primary" routerLink="ui">Counter</a>
-    <a class="link link-primary" routerLink="prefs">Prefs</a>
+  template: `<div>
+    <nav>
+      <a class="link link-primary m-4" routerLink="ui">Counter</a>
+      <a class="link link-primary m-4" routerLink="prefs">Prefs</a>
+    </nav>
     <router-outlet />
   </div>`,
   styles: ``,

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CounterStore } from '../services/counter.store';
 
 @Component({
@@ -22,5 +22,5 @@ import { CounterStore } from '../services/counter.store';
   styles: ``,
 })
 export class UiComponent {
-  store = Inject(CounterStore);
+  store = inject(CounterStore);
 }
