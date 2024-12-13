@@ -5,6 +5,7 @@ import {
   withComputed,
   withHooks,
   withMethods,
+  withState,
 } from '@ngrx/signals';
 import { BooksDataService } from './books-data.service';
 import { pipe, switchMap } from 'rxjs';
@@ -13,11 +14,35 @@ import { setEntities, withEntities } from '@ngrx/signals/entities';
 import { tapResponse } from '@ngrx/operators';
 import { BookEntity } from '../types';
 
+const BY_VALUES = ['title', 'author', 'year'] as const;
+type SortKey = keyof Pick<BookEntity, 'title' | 'author' | 'year'>;
+
+export type ByValues = (typeof BY_VALUES)[number];
+type ColumnState = {
+  current: string;
+  by: SortKey;
+};
+
 export const BooksStore = signalStore(
   withEntities<BookEntity>(),
+  withState<ColumnState>({
+    current: '',
+    by: 'title',
+  }),
   withComputed((store) => {
     return {
-      books: computed(() => store.entities()),
+      books: computed(() =>
+        store.entities().sort((a, b) => {
+          const key = store.by();
+          switch (key) {
+            case 'year':
+              return a.year > b.year ? 1 : a.year < b.year ? -1 : 0;
+            case 'author':
+            case 'title':
+              return a[key].localeCompare(b[key]);
+          }
+        }),
+      ),
       booksTotal: computed(() => store.entities().length),
       earliestYearPublished: computed(() =>
         store
@@ -35,6 +60,7 @@ export const BooksStore = signalStore(
           store.entities().length
         );
       }),
+      byValues: computed(() => BY_VALUES),
     };
   }),
   withMethods((store) => {
@@ -56,6 +82,7 @@ export const BooksStore = signalStore(
           ),
         ),
       ),
+      sortBy: (by: SortKey) => patchState(store, { by }),
     };
   }),
   withHooks({
