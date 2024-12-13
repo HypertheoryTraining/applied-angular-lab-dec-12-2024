@@ -3,6 +3,7 @@ import { BooksComponent } from './books.component';
 import { StatsComponent } from './pages/stats.component';
 import { ListComponent } from './pages/list.component';
 import { PrefsComponent } from './pages/prefs.component';
+import { DetailsComponent } from './pages/details.component';
 
 export const BOOKS_ROUTES: Routes = [
   {
@@ -12,6 +13,10 @@ export const BOOKS_ROUTES: Routes = [
       {
         path: 'list',
         component: ListComponent,
+      },
+      {
+        path: 'details/:id',
+        component: DetailsComponent,
       },
       {
         path: 'stats',

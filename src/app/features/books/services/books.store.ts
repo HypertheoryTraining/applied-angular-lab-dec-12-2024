@@ -14,6 +14,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { setEntities, withEntities } from '@ngrx/signals/entities';
 import { tapResponse } from '@ngrx/operators';
 import { BookEntity } from '../types';
+import { withSelectedBook } from './selected.feature';
 
 const BY_VALUES = ['title', 'author', 'year'] as const;
 type SortKey = keyof Pick<BookEntity, 'title' | 'author' | 'year'>;
@@ -28,6 +29,7 @@ export const BooksStore = signalStore(
   withState<SortState>({
     by: 'title',
   }),
+  withSelectedBook(),
   withComputed((store) => {
     return {
       books: computed(() =>
@@ -60,6 +62,10 @@ export const BooksStore = signalStore(
         );
       }),
       byValues: computed(() => BY_VALUES),
+      selectedBook: computed(() => {
+        const id = store.selectedBook();
+        return id;
+      }),
     };
   }),
   withMethods((store) => {
