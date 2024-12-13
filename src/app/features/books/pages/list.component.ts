@@ -2,10 +2,6 @@ import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { BooksStore } from '../services/books.store';
 import { BooksDataService } from '../services/books-data.service';
 
-// type BookApiResponse = {
-//   data: BookEntity[];
-// };
-
 @Component({
   selector: 'app-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,10 +12,10 @@ import { BooksDataService } from '../services/books-data.service';
       <table className="table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Year</th>
+            <th (click)="sortTable('ID')">ID</th>
+            <th (click)="sortTable('Title')">Title</th>
+            <th (click)="sortTable('Author')">Author</th>
+            <th (click)="sortTable('Year')">Year</th>
           </tr>
         </thead>
         <tbody>
@@ -41,4 +37,49 @@ import { BooksDataService } from '../services/books-data.service';
 })
 export class ListComponent {
   store = inject(BooksStore);
+
+  currentSortColumn = '';
+  isSortAsc = true;
+
+  sortTable(column: string) {
+    if (this.currentSortColumn === column) {
+      this.isSortAsc = !this.isSortAsc;
+    } else {
+      this.currentSortColumn = column;
+      this.isSortAsc = false;
+    }
+
+    switch (column) {
+      case 'Title':
+        return this.store
+          .books()
+          .sort((a, b) =>
+            this.isSortAsc
+              ? a.title.localeCompare(b.title)
+              : b.title.localeCompare(a.title),
+          );
+      case 'ID':
+        return this.store
+          .books()
+          .sort((a, b) =>
+            this.isSortAsc
+              ? parseInt(a.id) - parseInt(b.id)
+              : parseInt(b.id) - parseInt(a.id),
+          );
+      case 'Author':
+        return this.store
+          .books()
+          .sort((a, b) =>
+            this.isSortAsc
+              ? a.author.localeCompare(b.author)
+              : b.author.localeCompare(a.author),
+          );
+      case 'Year':
+        return this.store
+          .books()
+          .sort((a, b) => (this.isSortAsc ? a.year - b.year : b.year - a.year));
+      default:
+        return undefined;
+    }
+  }
 }
